@@ -1,0 +1,4 @@
+#!/bin/sh
+
+GITHUB_API_TOKEN=<your api token that has "repo" access>
+GITHUB_SUMMARY_EMAIL=<your email>
