@@ -21,11 +21,18 @@ read -r -d '' phpparam << ENDPHP
 \$js = file_get_contents('$GITHUB_SUMMARY_PATH/github-summary.tmp');
 \$results = json_decode(\$js);
 \$cursor = NULL;
+if (empty('$GITHUB_SUMMARY_TIMEZONE')) {
+  \$tz = new DateTimeZone(date_default_timezone_get());
+} else {
+  \$tz = new DateTimeZone('$GITHUB_SUMMARY_TIMEZONE');
+}
 foreach(\$results->data->repository->pullRequests->edges as \$r) {
+  \$dt = new DateTime(\$r->node->updatedAt);
+  \$dt->setTimezone(\$tz);
   echo "{\$r->node->title}\\n";
   echo "https://github.com/civicrm/civicrm-core/pull/{\$r->node->number}\\n";
   echo "Status: {\$r->node->state}\\n";
-  echo "Updated: {\$r->node->updatedAt}\\n";
+  echo "Updated: " . \$dt->format('Y-m-d H:i') . "\\n";
   echo "{\$r->node->bodyText}\\n\\n========================\\n\\n";
   \$cursor = \$r->cursor;
 }

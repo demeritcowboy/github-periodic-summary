@@ -8,6 +8,9 @@ GITHUB_SUMMARY_EMAIL=you@example.com
 # Path to a folder where we can store other persistent data. It doesn't need to be in the same folder as the script but the folder itself needs write access by the user that runs the script, and the lastcursor file needs to also be writable. This file itself however should only be readable, and only readable by that user since it has the password above.
 GITHUB_SUMMARY_PATH=/path/to/config/folder
 
+# Timezone for displaying times, e.g. America/New_York
+GITHUB_SUMMARY_TIMEZONE=GMT
+
 # The owner and repo name of the repo for which you want the digest.
 # At the moment can only do one here.
 GITHUB_REPO_OWNER=civicrm
