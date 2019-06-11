@@ -21,10 +21,11 @@ read -r -d '' phpparam << ENDPHP
 \$js = file_get_contents('$GITHUB_SUMMARY_PATH/github-summary.tmp');
 \$results = json_decode(\$js);
 \$cursor = NULL;
-if (empty('$GITHUB_SUMMARY_TIMEZONE')) {
+\$gs_tz = '$GITHUB_SUMMARY_TIMEZONE';
+if (empty(\$gs_tz)) {
   \$tz = new DateTimeZone(date_default_timezone_get());
 } else {
-  \$tz = new DateTimeZone('$GITHUB_SUMMARY_TIMEZONE');
+  \$tz = new DateTimeZone(\$gs_tz);
 }
 foreach(\$results->data->repository->pullRequests->edges as \$r) {
   \$dt = new DateTime(\$r->node->updatedAt);
